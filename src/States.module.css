@@ -1,6 +1,11 @@
 .dropdown{
     height: 40px;
     margin: 10px;
+    padding-left: 4px;
+}
+
+.dropdown>option{
+    height: 40px;
 }
 
 .result{

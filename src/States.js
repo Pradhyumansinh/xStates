@@ -5,22 +5,22 @@ const States = () => {
     const [countries, setCountries] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState("");
-    const [selectedState, setSelectedState] = useState("''");
-    const [selectedCity, setSelectedCity] = useState("");
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
 
     useEffect(() => {
         fetch('https://crio-location-selector.onrender.com/countries')
             .then((response) => response.json())
             .then((data) => {
+                // setSelectedCity("");
+                // setCities([]);
+                // setSelectedCountry("");
                 setCountries(data);
-                setSelectedCountry("");
-                setStates([]);
-                setSelectedState("");
-                setCities([]);
-                setSelectedCity("");
+                // setSelectedState("");
+                // setStates([]);
             })
-            .catch((error) => console.error(error));
+            .catch((error) => console.log("Country data not fetched"));
     }, [])
 
     useEffect(() => {
@@ -28,12 +28,13 @@ const States = () => {
             fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/states`)
                 .then((response) => response.json())
                 .then((data) => {
-                    setSelectedState("");
+                    setStates([]);
+                    setSelectedState(null);
+                    setSelectedCity(null);
                     setCities([]);
-                    setSelectedCity("");
                     setStates(data);
                 })
-                .catch((error) => console.error(error));
+                .catch((error) => console.leg("State data not fetched"));
         }
     }, [selectedCountry])
 
@@ -43,11 +44,16 @@ const States = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     setCities(data);
-                    setSelectedCity("");
+                    setSelectedCity(null);
+                    console.log("fill cities");
                 })
-                .catch((error) => console.error(error));
+                .catch((error) => console.log("City data not fetched"));
         }
     }, [selectedCountry, selectedState])
+
+    console.log("selectedCountries=" + selectedCountry);
+    console.log("selectedStates=" + selectedState);
+    console.log("selectedCities=" + selectedCity);
 
     return (
         <div>
@@ -64,7 +70,7 @@ const States = () => {
 
             <select id="city" className={styles.dropdown} disabled={!selectedState} onChange={(e) => setSelectedCity(e.target.value)}>
                 <option>Select City</option>
-                {(selectedState && selectedCountry) && cities.map((city) => <option key={city}>{city}</option>)}
+                {(selectedState) && cities.map((city, i) => <option key={i}>{city}</option>)}
             </select>
 
             {selectedCity && (
