@@ -29,7 +29,8 @@ const States = () => {
     const fetchStates = async (countryName) => {
         try {
             const response = await axios.get(`https://crio-location-selector.onrender.com/country=${countryName}/states`);
-            setStates(response.data);
+            const stateList = Array.from(new Map(response.data.map(item => [item, item])).values());
+            setStates(stateList);
             setSelectedCountry(countryName); // Set selected country after fetching states
             setSelectedState(''); // Reset selected state and city when country changes
             setSelectedCity('');
@@ -42,7 +43,8 @@ const States = () => {
     const fetchCities = async (countryName, stateName) => {
         try {
             const response = await axios.get(`https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`);
-            setCities(response.data);
+            const cityList = Array.from(new Map(response.data.map(item => [item, item])).values());
+            setCities(cityList);
             setSelectedState(stateName); // Set selected state after fetching cities
             setSelectedCity(''); // Reset selected city when state changes
         } catch (error) {
