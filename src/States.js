@@ -76,7 +76,7 @@ const States = () => {
             <h1>Select Location</h1>
             <select id="country" className={styles.dropdown} onChange={handleCountryChange} value={selectedCountry}>
                 <option value="" disabled>Select Country</option>
-                {countries.map((item) => <option key={item}>{item}</option>)}
+                {countries.map((country) => <option key={country}>{country}</option>)}
             </select>
 
             <select id="state" className={styles.dropdown} disabled={!selectedCountry} onChange={handleStateChange} value={selectedState}>
@@ -86,7 +86,7 @@ const States = () => {
 
             <select id="city" className={styles.dropdown} disabled={!selectedState} onChange={handleCityChange} value={selectedCity}>
                 <option value="" disabled>Select City</option>
-                {cities.map((city, i) => <option key={i}>{city}</option>)}
+                {cities.map((city) => <option key={city}>{city}</option>)}
             </select>
 
             {selectedCity && (
