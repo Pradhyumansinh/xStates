@@ -19,7 +19,8 @@ const States = () => {
     const fetchCountries = async () => {
         try {
             const response = await axios.get('https://crio-location-selector.onrender.com/countries');
-            setCountries(response.data);
+            const countriesList = Array.from(new Map(response.data.map(item => [item, item])).values());
+            setCountries(countriesList);
         } catch (error) {
             console.error('Error fetching countries:', error);
         }
