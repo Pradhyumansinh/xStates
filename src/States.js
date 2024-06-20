@@ -95,8 +95,8 @@ const States = () => {
 
             {selectedCity && (
                 <h2 className={styles.result}>
-                    You Selected <span className={styles.highlight}>{selectedCity}, </span>
-                    <span className={styles.fade}>{selectedState}, {selectedCountry}</span>
+                    <span>You Selected <span className={styles.highlight}>{selectedCity}, </span>
+                        <span className={styles.fade}>{selectedState}, {selectedCountry}</span></span>
                 </h2>
             )
             }
