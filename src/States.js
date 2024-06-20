@@ -92,15 +92,16 @@ const States = () => {
                 <option value="" disabled>Select City</option>
                 {cities.map((city) => <option key={city}>{city}</option>)}
             </select>
-
+            <br />
             {selectedCity && (
-                <h2 className={styles.result}>
-                    <span>You Selected {selectedCity}, {selectedState}, {selectedCountry}</span>
-                </h2>
+                <span className={styles.result}>
+                    You Selected <span className={styles.highlight}>{selectedCity}, </span>
+                    <span className={styles.fade}>{selectedState}, {selectedCountry}</span>
+                </span>
             )
             }
 
-        </div >
+        </div>
     )
 }
 
