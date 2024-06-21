@@ -23,7 +23,7 @@ const States = () => {
     const fetchCountries = async () => {
         try {
             const response = await axios.get('https://crio-location-selector.onrender.com/countries');
-            const countriesList = [...new Set(trimData(response.data))];
+            const countriesList = response.data;
             setCountries(countriesList);
         } catch (error) {
             console.error('Error fetching countries:', error);
@@ -34,7 +34,7 @@ const States = () => {
     const fetchStates = async (countryName) => {
         try {
             const response = await axios.get(`https://crio-location-selector.onrender.com/country=${countryName}/states`);
-            const stateList = [...new Set(trimData(response.data))];
+            const stateList = response.data;
             setStates(stateList);
             setSelectedCountry(countryName); // Set selected country after fetching states
             setSelectedState(''); // Reset selected state and city when country changes
@@ -48,7 +48,7 @@ const States = () => {
     const fetchCities = async (countryName, stateName) => {
         try {
             const response = await axios.get(`https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`);
-            const cityList = [...new Set(trimData(response.data))];
+            const cityList = response.data;
             setCities(cityList);
             setSelectedState(stateName); // Set selected state after fetching cities
             setSelectedCity(''); // Reset selected city when state changes
